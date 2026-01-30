@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+body {
+  font-family: "Roboto Light", sans-serif;
+}
+
+.swiper-pagination-bullet {
+  @apply w-3 h-3 bg-white opacity-50;
+}
+
+.swiper-pagination-bullet-active {
+  @apply opacity-100;
+}
+
+.custom-link:hover {
+  color: oklch(63.7% 0.237 25.331);
+  cursor:pointer;
+}
+
+.custom-link:hover svg path{
+  stroke: oklch(63.7% 0.237 25.331);
+}
