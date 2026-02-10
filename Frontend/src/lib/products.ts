@@ -3,279 +3,80 @@ export interface Product {
     name: string
     image: string
     price: number
-    oldPrice?: number // ✅ вот это поле!
+    oldPrice?: number
     available: boolean
     subtitle?: string
     advantages?: string[]
     description?: string
     specs?: Record<string, string[]>
+    keywords?: string[]
 }
 
+type ProductRow = {
+    sku: string
+    name: string
+    image: string
+    price: number | string
+    old_price?: number | string | null
+    available: number | boolean
+    subtitle?: string | null
+    advantages?: string[] | string | null
+    description?: string | null
+    specs?: Record<string, string[]> | string | null
+    keywords?: string | string[] | null
+}
 
-export const products: Product[] = [
-    {
-        sku: "34827519",
-        name: "Microsoft Xbox Series X",
-        image: "/assets/console/xbox.png",
-        price: 499.99,
-        available: true,
-        subtitle: "САМАЯ БЫСТРАЯ И САМАЯ МОЩНАЯ КОНСОЛЬ XBOX ЗА ВСЮ ИСТОРИЮ.",
-        advantages: [
-            "Игры с истинным разрешением 4K",
-            "До 120 кадров в секунду",
-            "8K HDR High Dynamic Range",
-            "Архитектура Xbox Velocity"
-        ],
-        description: `КОНСОЛЬ НОВОГО ПОКОЛЕНИЯ Xbox Series X – это игровая консоль нового поколения, которая предлагает Вам широкий выбор цифровых игр, а также поддерживает физические диски с играми. С цифровыми играми все особенно просто – Ваши игры, записи и резервные копии надежно хранятся в облаке. Больше не нужно идти в магазин, чтобы купить игры, или ждать, пока они придут в почтовый офис. Оформляйте предзаказ и предустанавливайте новые игры, чтобы начать играть сразу же после их поступления.  БОЛЬШЕ ИГРАЙТЕ, МЕНЬШЕ ЖДИТЕ Функция Quick Resume позволяет легко переключаться между несколькими играми и мгновенно возвращаться к тому месту, на котором Вы остановились.  ИГРЫ С ИСТИННЫМ РАЗРЕШЕНИЕМ 4K Xbox Series X обеспечивает сенсационно плавную частоту до 120 к/с и яркую и контрастную HDR-картинку. Полностью погрузитесь в игру и наслаждайтесь более четкими персонажами, яркими мирами и невероятными деталями в сверхреалистичном качестве 4K.  12 ТЕРАФЛОПС ВЫЧИСЛИТЕЛЬНОЙ МОЩНОСТИ Благодаря вычислительной мощности 12 терафлопс в системе на кристалле (SOC) и архитектурам AMD Zen 2 и RDNA 2 можно создавать миры, заслуживающие пристального изучения.`,
-        specs: {
-            "Хранение данных": [
-                "Объем жесткого диска / накопителя: 1000 ГБ",
-                "Тип устройства памяти : SSD"
-            ],
-            "Интерфейсы": [
-                "HDMI : Да",
-                "USB-A 3.1 : Да",
-                "NFC : Нет",
-                "Оптический аудиовыход : Нет"
-            ],
-            "Игровые приставки": [
-                "Поддержка носителей : Blu-ray",
-                "Поддержка 4K : Да",
-                "Аудиосистема : Stereo, Surround, Atmos",
-                "Поддержка HDR : Да"
-            ],
-            "Браузер и загрузка": [
-                "3G : Нет", "4G : Нет", "5G : Нет",
-                "LAN (RJ45) : 10/100/1000",
-                "Wi-Fi : Да"
-            ],
-            "Общие параметры": [
-                "Производитель : Microsoft",
-                "Платформа : Xbox Series X",
-                "Цвет : Чёрный",
-                "В комплекте : Консоль, беспроводной геймпад, кабель HDMI, кабель питания"
-            ]
-        }
-    },
-    {
-        sku: "72984562",
-        name: "PlayStation 4",
-        image: "/assets/console/playstation4.png",
-        price: 149.99,
-        oldPrice: 568.99,
-        available: true,
-        subtitle: "Классическая игровая приставка от Sony.",
-        advantages: ["HDR-графика", "Игры в Full HD", "Поддержка Blu-ray"],
-        description: `PlayStation 4 — популярная игровая консоль от Sony, обеспечивающая великолепное качество графики и большой выбор игр.`,
-        specs: {
-            "Память": ["Жесткий диск: 1 ТБ"],
-            "Подключения": ["HDMI: Да", "USB: Да"],
-            "Особенности": ["Blu-ray привод: Да", "Wi-Fi: Да"]
-        }
-    },
-    {
-        sku: "18560437",
-        name: "Nintendo Switch Lite",
-        image: "/assets/console/NSwitch.png",
-        price: 199.99,
-        available: true,
-        subtitle: "Компактная и лёгкая консоль Nintendo.",
-        advantages: ["Портативность", "Яркий экран", "Доступ к эксклюзивам"],
-        description: `Switch Lite — идеальный выбор для мобильного гейминга. Поддержка всех цифровых игр Nintendo Switch.`,
-        specs: {
-            "Экран": ["5.5'' HD", "Сенсорный экран"],
-            "Связь": ["Wi-Fi", "Bluetooth"]
-        }
-    },
-    {
-        sku: "40392816",
-        name: "Samsung Printer",
-        image: "/assets/printer/samsung.png",
-        price: 279.99,
-        available: true,
-        subtitle: "Надёжный лазерный принтер Samsung.",
-        advantages: ["Быстрая печать", "Wi-Fi соединение", "Компактный дизайн"],
-        description: `Идеально подходит для домашнего и офисного использования. Поддержка беспроводной печати.`,
-        specs: {
-            "Печать": ["Скорость: 20 стр/мин", "Разрешение: 1200x1200 dpi"],
-            "Интерфейсы": ["USB", "Wi-Fi"]
-        }
-    },
-    {
-        sku: "95672041",
-        name: "Canon EOS 550",
-        image: "/assets/photocamera/canonEOS550.png",
-        price: 599.99,
-        available: true,
-        subtitle: "Полупрофессиональная зеркалка Canon.",
-        advantages: ["18 МП", "Full HD видео", "Съёмка RAW"],
-        description: `Камера для начинающих фотографов и видеографов. Простое управление и качественные снимки.`,
-        specs: {
-            "Матрица": ["18 МП CMOS"],
-            "Видео": ["Full HD 1080p"],
-            "Объектив": ["EF / EF-S крепление"]
-        }
-    },
-    {
-        sku: "61735824",
-        name: "Canon EOS 550 (черный)",
-        image: "/assets/photocamera/canonEOS550.png",
-        price: 599.99,
-        available: true,
-        subtitle: "Canon EOS 550 в стильном чёрном цвете.",
-        advantages: ["Автоматический фокус", "RAW режим", "Съёмка с Live View"],
-        description: `Та же камера, но в другом оформлении. Подходит для фото и видео.`,
-        specs: {
-            "Матрица": ["18 МП", "CMOS сенсор"],
-            "Дисплей": ["3 дюйма", "Поворотный"],
-            "Память": ["SD, SDHC, SDXC"]
-        }
-    },
-    {
-        sku: "20469731",
-        name: "Canon EOS 550 (с расширенным комплектом)",
-        image: "/assets/photocamera/canonEOS550.png",
-        price: 599.99,
-        available: false,
-        subtitle: "Камера + сумка + карта памяти",
-        advantages: ["Готовый комплект", "Удобство в поездках", "Быстрый старт"],
-        description: `Этот комплект включает всё необходимое для начала съёмки — идеален для подарка.`,
-        specs: {
-            "Комплектация": ["Камера", "Сумка", "SD-карта 32ГБ"],
-            "Вес": ["475 г"],
-            "Цвет": ["Чёрный"]
-        }
-    },
-    {
-        sku: "34891234",
-        name: "Lenovo IdeaPad 5",
-        image: "/assets/laptop/lenovo-ideapad5.png",
-        price: 799.99,
-        available: true,
-        subtitle: "Универсальный ноутбук для учёбы, работы и развлечений.",
-        advantages: [
-            "Процессор AMD Ryzen 5",
-            "IPS экран 15.6\" Full HD",
-            "SSD накопитель 512 ГБ",
-            "До 8 часов автономной работы"
-        ],
-        description: `Lenovo IdeaPad 5 — это сбалансированный ноутбук, подходящий для большинства повседневных задач. Благодаря производительному процессору, качественному экрану и быстрому SSD-диску вы сможете комфортно учиться, работать и смотреть фильмы.`,
-        specs: {
-            "Экран": ["15.6 дюймов", "1920x1080 (Full HD)", "IPS матрица"],
-            "Процессор и ОЗУ": ["AMD Ryzen 5 5500U", "8 ГБ DDR4"],
-            "Хранение данных": ["512 ГБ SSD"],
-            "Интерфейсы": ["HDMI", "USB-C", "Wi-Fi 5", "Bluetooth 5.0"],
-            "Операционная система": ["Windows 11 Home"]
-        }
-    },
-    {
-        sku: "42739561",
-        name: "Apple MacBook Air M2",
-        image: "/assets/laptop/macbook-air-m2.png",
-        price: 1199.99,
-        available: true,
-        subtitle: "Лёгкий, мощный и стильный ноутбук от Apple на чипе M2.",
-        advantages: [
-            "Чип Apple M2",
-            "Retina экран 13.6\"",
-            "Тихая работа без вентиляторов",
-            "До 18 часов автономной работы"
-        ],
-        description: `MacBook Air с процессором Apple M2 сочетает в себе невероятную производительность, энергоэффективность и стильный дизайн. Подходит как для работы, так и для творчества.`,
-        specs: {
-            "Экран": ["13.6 дюйма", "Retina", "True Tone"],
-            "Процессор и ОЗУ": ["Apple M2", "8 ГБ RAM"],
-            "Хранение данных": ["256 ГБ SSD"],
-            "Интерфейсы": ["2 x Thunderbolt / USB 4", "MagSafe 3", "Wi-Fi 6", "Bluetooth 5.0"],
-            "Операционная система": ["macOS Ventura"]
-        }
-    },
-    {
-        sku: "58391027",
-        name: "ASUS ROG Zephyrus G14",
-        image: "/assets/laptop/asus-rog-g14.png",
-        price: 1599.99,
-        available: true,
-        subtitle: "Игровой ноутбук с компактным дизайном и максимальной мощностью.",
-        advantages: [
-            "NVIDIA GeForce RTX 4060",
-            "AMD Ryzen 9 7940HS",
-            "165 Гц QHD экран",
-            "Тонкий и лёгкий корпус"
-        ],
-        description: `ASUS ROG G14 — это один из самых мощных компактных игровых ноутбуков. Он сочетает в себе высокую производительность и премиальные технологии охлаждения.`,
-        specs: {
-            "Экран": ["14 дюймов", "QHD (2560x1440)", "165 Гц", "IPS"],
-            "Процессор и ОЗУ": ["Ryzen 9 7940HS", "16 ГБ DDR5"],
-            "Хранение данных": ["1 ТБ SSD"],
-            "Графика": ["NVIDIA GeForce RTX 4060 8GB"],
-            "Операционная система": ["Windows 11 Pro"]
-        }
-    },
-    {
-        sku: "34891234",
-        name: "Lenovo IdeaPad 5",
-        image: "/assets/laptop/lenovo-ideapad5.png",
-        price: 799.99,
-        available: true,
-        subtitle: "Универсальный ноутбук для учёбы, работы и развлечений.",
-        advantages: [
-            "Процессор AMD Ryzen 5",
-            "IPS экран 15.6\" Full HD",
-            "SSD накопитель 512 ГБ",
-            "До 8 часов автономной работы"
-        ],
-        description: `Lenovo IdeaPad 5 — это сбалансированный ноутбук, подходящий для большинства повседневных задач. Благодаря производительному процессору, качественному экрану и быстрому SSD-диску вы сможете комфортно учиться, работать и смотреть фильмы.`,
-        specs: {
-            "Экран": ["15.6 дюймов", "1920x1080 (Full HD)", "IPS матрица"],
-            "Процессор и ОЗУ": ["AMD Ryzen 5 5500U", "8 ГБ DDR4"],
-            "Хранение данных": ["512 ГБ SSD"],
-            "Интерфейсы": ["HDMI", "USB-C", "Wi-Fi 5", "Bluetooth 5.0"],
-            "Операционная система": ["Windows 11 Home"]
-        }
-    },
-    {
-        sku: "42739561",
-        name: "Apple MacBook Air M2",
-        image: "/assets/laptop/macbook-air-m2.png",
-        price: 1199.99,
-        available: true,
-        subtitle: "Лёгкий, мощный и стильный ноутбук от Apple на чипе M2.",
-        advantages: [
-            "Чип Apple M2",
-            "Retina экран 13.6\"",
-            "Тихая работа без вентиляторов",
-            "До 18 часов автономной работы"
-        ],
-        description: `MacBook Air с процессором Apple M2 сочетает в себе невероятную производительность, энергоэффективность и стильный дизайн. Подходит как для работы, так и для творчества.`,
-        specs: {
-            "Экран": ["13.6 дюйма", "Retina", "True Tone"],
-            "Процессор и ОЗУ": ["Apple M2", "8 ГБ RAM"],
-            "Хранение данных": ["256 ГБ SSD"],
-            "Интерфейсы": ["2 x Thunderbolt / USB 4", "MagSafe 3", "Wi-Fi 6", "Bluetooth 5.0"],
-            "Операционная система": ["macOS Ventura"]
-        }
-    },
-    {
-        sku: "58391027",
-        name: "ASUS ROG Zephyrus G14",
-        image: "/assets/laptop/asus-rog-g14.png",
-        price: 1599.99,
-        available: true,
-        subtitle: "Игровой ноутбук с компактным дизайном и максимальной мощностью.",
-        advantages: [
-            "NVIDIA GeForce RTX 4060",
-            "AMD Ryzen 9 7940HS",
-            "165 Гц QHD экран",
-            "Тонкий и лёгкий корпус"
-        ],
-        description: `ASUS ROG G14 — это один из самых мощных компактных игровых ноутбуков. Он сочетает в себе высокую производительность и премиальные технологии охлаждения.`,
-        specs: {
-            "Экран": ["14 дюймов", "QHD (2560x1440)", "165 Гц", "IPS"],
-            "Процессор и ОЗУ": ["Ryzen 9 7940HS", "16 ГБ DDR5"],
-            "Хранение данных": ["1 ТБ SSD"],
-            "Графика": ["NVIDIA GeForce RTX 4060 8GB"],
-            "Операционная система": ["Windows 11 Pro"]
+const parseJson = <T>(value: unknown): T | undefined => {
+    if (value === null || value === undefined) return undefined
+    if (typeof value === 'string') {
+        try {
+            return JSON.parse(value) as T
+        } catch {
+            return undefined
         }
     }
-]
+    return value as T
+}
+
+const parseKeywords = (value: unknown): string[] | undefined => {
+    if (value === null || value === undefined) return undefined
+    if (Array.isArray(value)) return value.filter(Boolean).map(String)
+    if (typeof value === 'string') {
+        const trimmed = value.trim()
+        if (!trimmed) return undefined
+        if (trimmed.startsWith('[')) {
+            const parsed = parseJson<string[]>(trimmed)
+            if (parsed && Array.isArray(parsed)) return parsed
+        }
+        return trimmed
+            .split(',')
+            .map((part) => part.trim())
+            .filter(Boolean)
+    }
+    return undefined
+}
+
+export const mapProductRow = (row: ProductRow): Product => {
+    const advantages = parseJson<string[]>(row.advantages)
+    const specs = parseJson<Record<string, string[]>>(row.specs)
+    const keywords = parseKeywords(row.keywords)
+    const oldPriceValue = row.old_price
+    const oldPrice =
+        oldPriceValue === null || oldPriceValue === undefined
+            ? undefined
+            : Number(oldPriceValue)
+
+    return {
+        sku: row.sku,
+        name: row.name,
+        image: row.image,
+        price: Number(row.price),
+        oldPrice: oldPrice !== undefined && Number.isNaN(oldPrice) ? undefined : oldPrice,
+        available: Boolean(row.available),
+        subtitle: row.subtitle ?? undefined,
+        advantages,
+        description: row.description ?? undefined,
+        specs,
+        keywords
+    }
+}

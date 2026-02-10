@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
-import {products} from "@/lib/products";
 
 export interface CartItem {
     sku: string
@@ -11,7 +10,7 @@ export interface CartItem {
 
 interface CartContextType {
     cart: CartItem[]
-    add: (sku: string) => void
+    add: (sku: string, price: number) => void
     remove: (sku: string) => void
     increase: (sku: string) => void
     decrease: (sku: string) => void
@@ -40,12 +39,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         localStorage.setItem('cart', JSON.stringify(cart))
     }, [cart])
 
-    const add = (sku: string) => {
-        const product = products.find(p => p.sku === sku)
-        if (!product) return
-
-        const price = product.price
-
+    const add = (sku: string, price: number) => {
         setCart((prev) => {
             const existing = prev.find((item) => item.sku === sku)
             if (existing) {

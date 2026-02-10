@@ -1,26 +1,47 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { products } from '@/lib/products'
+import type { Product } from '@/lib/products'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export default function SearchBar() {
     const [search, setSearch] = useState('')
-    const [filtered, setFiltered] = useState([])
+    const [filtered, setFiltered] = useState<Product[]>([])
     const [open, setOpen] = useState(false)
     const wrapperRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (search.length > 1) {
-            const results = products.filter((p) =>
-                p.name.toLowerCase().includes(search.toLowerCase())
-            )
-            setFiltered(results)
-            setOpen(true)
-        } else {
+        const query = search.trim()
+        if (query.length < 2) {
             setFiltered([])
             setOpen(false)
+            return
+        }
+
+        const controller = new AbortController()
+        const timeout = setTimeout(async () => {
+            try {
+                const response = await fetch(
+                    `/api/products/search?q=${encodeURIComponent(query)}&limit=8`,
+                    { signal: controller.signal }
+                )
+                if (!response.ok) {
+                    throw new Error('Search failed')
+                }
+                const results = (await response.json()) as Product[]
+                setFiltered(results)
+                setOpen(true)
+            } catch (error) {
+                if ((error as { name?: string }).name !== 'AbortError') {
+                    setFiltered([])
+                }
+            }
+        }, 250)
+
+        return () => {
+            clearTimeout(timeout)
+            controller.abort()
         }
     }, [search])
 

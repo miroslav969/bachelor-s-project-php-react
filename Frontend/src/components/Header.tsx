@@ -43,11 +43,11 @@ export default function Header() {
                     <LanguageSwitcher />
                     <button
                         onClick={() => setCatalogOpen(true)}
-                        className="flex items-center gap-2 bg-black text-sm text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition"
-                    ><svg width="20" className="w-5 h-5" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 5H1M19 1H1M19 9H1M19 13H1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-
+                        className="hidden sm:flex items-center gap-2 bg-black text-sm text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition"
+                    >
+                        <svg width="20" className="w-5 h-5" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 5H1M19 1H1M19 9H1M19 13H1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
                         <span className="px-4">КАТАЛОГ</span>
                     </button>
                 </div>
@@ -100,6 +100,15 @@ export default function Header() {
                         </button>
 
                         <nav className="mt-12 flex flex-col gap-4">
+                            <button
+                                onClick={() => {
+                                    setCatalogOpen(true)
+                                    setMenuOpen(false)
+                                }}
+                                className="text-left text-lg font-medium"
+                            >
+                                Каталог
+                            </button>
                             <Link href="/wishlist" className="text-lg font-medium">Избранное</Link>
                             <Link href="/profile" className="text-lg font-medium">Профиль</Link>
                             <Link href="/cart" className="text-lg font-medium">Корзина</Link>

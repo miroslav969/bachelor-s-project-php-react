@@ -1,17 +1,19 @@
 'use client'
 
 import ProductSection from "@/components/ProductSection"
-import { products } from "@/lib/products"
 import { useEffect, useState } from "react"
+import { useProducts } from "@/lib/context/ProductsContext"
 
 export default function LastViewed() {
     const [recentProducts, setRecentProducts] = useState([])
+    const { products } = useProducts()
 
     useEffect(() => {
+        if (!products.length) return
         const viewed = JSON.parse(localStorage.getItem('viewed') || '[]')
         const recent = viewed.map((sku: string) => products.find(p => p.sku === sku)).filter(Boolean)
         setRecentProducts(recent)
-    }, [])
+    }, [products])
 
     return (
         <>

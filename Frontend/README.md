@@ -20,6 +20,32 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Database
+
+Products are now stored in MySQL and fetched via Next.js API routes.
+
+1. Create the table:
+
+```bash
+mysql -u root -p your_db < db/schema.sql
+```
+
+2. Seed products:
+
+```bash
+mysql -u root -p your_db < db/seed.sql
+```
+
+3. Configure environment variables (e.g., in `.env.local`):
+
+```
+MYSQL_HOST=127.0.0.1
+MYSQL_PORT=3306
+MYSQL_USER=app
+MYSQL_PASSWORD=secret
+MYSQL_DATABASE=shop
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

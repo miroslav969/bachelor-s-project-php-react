@@ -1,9 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import {products} from "@/lib/products";
 import {useCart} from "@/lib/context/CartContext";
 import { useRouter } from "next/navigation"
+import { useProducts } from "@/lib/context/ProductsContext";
 
 interface CartItem {
     sku: string
@@ -13,6 +13,7 @@ interface CartItem {
 export default function Page() {
     const { cart, increase, decrease, remove, totalCount, total } = useCart();
     const router = useRouter()
+    const { products, loading } = useProducts()
 
     const getProduct = (sku: string) => products.find((p) => p.sku === sku)
 
@@ -20,7 +21,10 @@ export default function Page() {
         <div className="max-w-4xl h-max mx-auto p-6 min-h-[100vh]">
             <h1 className="text-2xl font-bold mb-6">Корзина</h1>
 
-            {cart.map((item) => {
+            {loading && cart.length > 0 && (
+                <p className="text-gray-500">Загрузка товаров...</p>
+            )}
+            {!loading && cart.map((item) => {
                 const product = getProduct(item.sku)
                 if (!product) return null
 

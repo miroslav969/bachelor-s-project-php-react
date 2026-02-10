@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import {CartProvider} from "@/lib/context/CartContext";
 import {WishlistProvider} from "@/lib/context/WishlistContext";
 import { LangProvider } from "@/lib/context/LangContext"
+import { ProductsProvider } from "@/lib/context/ProductsContext";
 
 const geistRoboto = Roboto({
   variable: "--font-roboto",
@@ -23,13 +24,15 @@ export default function RootLayout({children}) {
       className={`${geistRoboto.variable} antialiased `}
     >
     <LangProvider>
-      <CartProvider>
-        <WishlistProvider>
-          <Header/>
-          {children}
-          <Footer/>
-        </WishlistProvider>
-      </CartProvider>
+      <ProductsProvider>
+        <CartProvider>
+          <WishlistProvider>
+            <Header/>
+            {children}
+            <Footer/>
+          </WishlistProvider>
+        </CartProvider>
+      </ProductsProvider>
     </LangProvider>
     </body>
     </html>

@@ -1,0 +1,16 @@
+﻿CREATE TABLE IF NOT EXISTS products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sku VARCHAR(32) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    old_price DECIMAL(10, 2) NULL,
+    available TINYINT(1) NOT NULL DEFAULT 1,
+    subtitle TEXT NULL,
+    advantages JSON NULL,
+    description TEXT NULL,
+    specs JSON NULL,
+    keywords TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

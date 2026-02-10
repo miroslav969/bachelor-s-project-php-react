@@ -1,11 +1,18 @@
 'use client'
-import { notFound } from 'next/navigation'
-import {products} from "@/lib/products";
 import {useEffect} from "react";
+import { useProducts } from "@/lib/context/ProductsContext";
 
 export default function ProductClient({ sku }: { sku: string }) {
+    const { products, loading } = useProducts()
     const product = products.find(p => p.sku === sku)
-    if (!product) return notFound()
+
+    if (loading) {
+        return <div className="p-8 max-w-7xl mx-auto min-h-[100vh]">Р—Р°РіСЂСѓР·РєР° С‚РѕРІР°СЂР°...</div>
+    }
+
+    if (!product) {
+        return <div className="p-8 max-w-7xl mx-auto min-h-[100vh]">РўРѕРІР°СЂ РЅРµ РЅР°Р№РґРµРЅ</div>
+    }
 
     useEffect(() => {
         if (typeof window === 'undefined') return

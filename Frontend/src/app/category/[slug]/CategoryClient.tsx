@@ -2,14 +2,15 @@
 
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { products } from '@/lib/products'
 import ProductCard from '@/components/ProductCard'
 import { SlidersHorizontal } from 'lucide-react'
 import FilterModal from '@/components/FilterModal'
+import { useProducts } from '@/lib/context/ProductsContext'
 
 export default function CategoryClient({ slug }: { slug: string }) {
     const router = useRouter()
     const searchParams = useSearchParams()
+    const { products, loading } = useProducts()
     const [selectedFilters, setSelectedFilters] = useState<{ [key: string]: string[] }>({})
     const [filterOpen, setFilterOpen] = useState(false)
 
@@ -71,10 +72,13 @@ export default function CategoryClient({ slug }: { slug: string }) {
             </div>
 
             <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-4">
-                {filteredProducts.map(product => (
+                {loading && (
+                    <p className="text-gray-500 col-span-full text-center">Загрузка товаров...</p>
+                )}
+                {!loading && filteredProducts.map(product => (
                     <ProductCard key={product.sku} {...product} />
                 ))}
-                {filteredProducts.length === 0 && (
+                {!loading && filteredProducts.length === 0 && (
                     <p className="text-gray-500 col-span-full text-center">Товары не найдены</p>
                 )}
             </main>

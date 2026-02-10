@@ -66,7 +66,7 @@ export default function ProductCard({ name, price, oldPrice, image, sku, specs }
                     <button
                         onClick={(e) => {
                             e.preventDefault()
-                            add(sku)
+                            add(sku, price)
                             toast.success(`${name} добавлен в корзину`)
                         }}
                         className="bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded"

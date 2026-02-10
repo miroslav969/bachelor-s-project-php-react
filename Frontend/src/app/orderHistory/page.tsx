@@ -1,9 +1,9 @@
 'use client'
 
 import {Fragment, useEffect, useState} from 'react'
-import { products } from '@/lib/products'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useProducts } from '@/lib/context/ProductsContext'
 
 interface Order {
     id: number
@@ -21,6 +21,7 @@ export default function OrderHistoryPage() {
     const [orders, setOrders] = useState<Order[]>([])
     const [expanded, setExpanded] = useState<number | null>(null)
     const [filter, setFilter] = useState<'all' | 'completed'>('all')
+    const { products, loading } = useProducts()
 
     useEffect(() => {
         const stored = localStorage.getItem('orders')
@@ -63,6 +64,9 @@ export default function OrderHistoryPage() {
                     <option value="completed">Завершённые</option>
                 </select>
             </div>
+            {loading && (
+                <p className="text-gray-500 mb-4">Загрузка товаров...</p>
+            )}
 
             <div className="overflow-x-auto">
                 <table className="min-w-full text-left text-sm">
