@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     const query = (searchParams.get('q') ?? '').trim()
     const limitParam = searchParams.get('limit')
     const limit = limitParam ? Number.parseInt(limitParam, 10) : 8
-    const safeLimit = Number.isFinite(limit) ? Math.min(limit, 50) : 8
+    const safeLimit = Number.isFinite(limit) && limit > 0 ? Math.min(limit, 50) : 8
 
     if (query.length < 2) {
         return NextResponse.json([])

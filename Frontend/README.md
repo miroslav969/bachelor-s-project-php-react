@@ -46,6 +46,46 @@ MYSQL_PASSWORD=secret
 MYSQL_DATABASE=shop
 ```
 
+## Tests
+
+Route tests are located in `tests/routes`.
+
+```bash
+npm run test:routes
+```
+
+Unit tests:
+
+```bash
+npm run test:unit
+```
+
+Run all tests:
+
+```bash
+npm test
+```
+
+Load test for API product routes (requires a running app, e.g. `npm run dev`):
+
+```bash
+npm run test:load
+```
+
+Optional load-test env vars:
+
+```bash
+LOAD_TEST_BASE_URL=http://127.0.0.1:3000
+LOAD_TEST_DURATION_SEC=20
+LOAD_TEST_CONNECTIONS=20
+LOAD_TEST_PIPELINING=1
+LOAD_TEST_QUERY=keyboard
+LOAD_TEST_SKU=SKU-1
+LOAD_TEST_MAX_P95_MS=800
+LOAD_TEST_MAX_ERROR_RATE=0.02
+LOAD_TEST_MIN_REQUESTS=200
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
